@@ -1,0 +1,22 @@
+{
+  "name": "pause-and-prime",
+  "version": "1.0.4",
+  "description": "Pause & Prime — Intentional Micro-Break Platform with Pre-Commitment Anchors",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "micro-break",
+    "productivity",
+    "focus",
+    "timer",
+    "anti-brain-rot",
+    "pre-commitment"
+  ],
+  "author": "Pause & Prime Engineering Team",
+  "license": "MIT"
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pause & Prime — Synced Break Window</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .popup-top-bar {
+      background: #091310;
+      border-bottom: 2px solid var(--sage-700);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      z-index: 100;
+    }
+    .popup-iframe {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .lockout-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 10, 8, 0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-top-bar">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span style="font-family: var(--font-heading); font-weight: 700; color: var(--sage-300);">Pause & Prime</span>
+      <span id="popupAnchor" style="font-size: 0.85rem; color: var(--text-muted); max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Next task: Loading...</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span id="popupClock" class="timer-display" style="font-size: 1.4rem; font-weight: 700; color: #fff;">00:00</span>
+      <button onclick="window.close()" style="background: rgba(244,63,94,0.2); border: 1px solid var(--accent-rose); color: #fecdd3; border-radius: 6px; padding: 0.3rem 0.6rem; cursor: pointer; font-size: 0.8rem;">Close Window</button>
+    </div>
+  </div>
+
+  <iframe id="popupFrame" class="popup-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+
+  <div id="popupLockout" class="lockout-screen">
+    <h2 style="font-size: 2rem; color: #fff; margin-bottom: 1rem;">Time is Up! ⏱️</h2>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Your break is complete. Please return to the main Pause & Prime window to re-enter your task.</p>
+    <button onclick="window.close()" class="btn-start-break" style="max-width: 240px;">Close Window Now</button>
+  </div>
+
+  <script type="module">
+    import { timerSync } from '/js/broadcast.js';
+
+    const params = new URLSearchParams(window.location.search);
+    const targetUrl = params.get('url') || 'about:blank';
+    const anchor = params.get('anchor') || 'Return to work';
+
+    document.getElementById('popupFrame').src = targetUrl;
+    document.getElementById('popupAnchor').textContent = `🎯 Next: ${anchor}`;
+
+    timerSync.onMessage((data) => {
+      if (data.type === 'TIMER_TICK') {
+        document.getElementById('popupClock').textContent = data.formattedTime;
+        if (data.remainingSeconds <= 30) {
+          document.getElementById('popupClock').style.color = '#f59e0b';
+        }
+      } else if (data.type === 'LOCKOUT') {
+        // Zero-delay lockout: immediately hide frame and display lockout screen
+        document.getElementById('popupFrame').style.display = 'none';
+        document.getElementById('popupLockout').style.display = 'flex';
+      }
+    });
+  </script>
+</body>
+</html>

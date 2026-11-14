@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pause & Prime — Intentional Micro-Break Platform</title>
+  <meta name="description" content="Eliminate break procrastination and brain-rot scrolling with curated low-stimulation micro-breaks and mandatory pre-commitment work anchors.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div id="app-root">
+
+    <!-- App Header & Navigation -->
+    <header class="app-header">
+      <div class="brand-container">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title">Pause & Prime</span>
+        </div>
+        <span class="brand-badge">MVP v1.0.4</span>
+      </div>
+
+      <!-- Navigation Tabs (Dual Pathways) -->
+      <nav class="nav-tabs">
+        <button id="tabQuick" class="nav-tab-btn active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Quick Setup</span>
+        </button>
+        <button id="tabExplore" class="nav-tab-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Explore Directory</span>
+        </button>
+      </nav>
+
+      <!-- User Session Stats -->
+      <div class="header-actions">
+        <div class="stat-chip" title="Breaks completed today">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span id="statSessionsCount">0</span>
+          <span style="color: var(--text-dim); font-size: 0.75rem;">breaks</span>
+        </div>
+        <div class="stat-chip" title="Intentional break time">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="statTimeCount">0m</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+
+      <!-- Hero Statement -->
+      <section class="hero-section">
+        <div class="hero-pill">
+          <span style="display:inline-block; width:6px; height:6px; background:var(--sage-primary); border-radius:50%;"></span>
+          Zero Brain-Rot • Zero Time Blindness
+        </div>
+        <h1 class="hero-title">Reset Your Mind, <span>Pre-Commit</span> Your Next Step</h1>
+        <p class="hero-subtitle">
+          Eliminate the 5-minute break spiral. Engage in low-stimulation generative art, STEM visualizers, or micro-logic with a strict bounded countdown and mandatory task re-entry anchor.
+        </p>
+      </section>
+
+      <!-- Pathway 1: Quick Setup Section -->
+      <section id="sectionQuick">
+        <div class="quick-setup-card">
+          <!-- Step 1: Duration -->
+          <div class="setup-step">
+            <div class="setup-step-label">
+              <span class="step-num">1</span>
+              <span>Select Bounded Break Duration</span>
+            </div>
+            <div class="duration-selector">
+              <button class="duration-pill quick-duration-pill" data-mins="1">1 min</button>
+              <button class="duration-pill quick-duration-pill" data-mins="2">2 min</button>
+              <button class="duration-pill quick-duration-pill" data-mins="3">3 min</button>
+              <button class="duration-pill quick-duration-pill active" data-mins="5">5 min</button>
+              <button class="duration-pill quick-duration-pill" data-mins="10">10 min</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Micro-Anchor (Pre-Commitment Enforcement) -->
+          <div class="setup-step">
+            <div class="setup-step-label">
+              <span class="step-num">2</span>
+              <span>Define Mandatory 2-Minute Work Anchor Task</span>
+            </div>
+            <div class="anchor-task-box">
+              <textarea
+                id="quickAnchorInput"
+                class="anchor-task-input"
+                placeholder="What exact 2-minute physical or digital task will you do the second this break ends? (e.g. Reply to client email, run unit tests, write function signature...)"
+                rows="2"
+                maxlength="280"
+              ></textarea>
+              <div class="anchor-task-footer">
+                <span>Minimum 3 characters required to unlock break</span>
+                <span id="quickCharCounter" class="char-counter">0 / 280</span>
+              </div>
+            </div>
+
+            <!-- Quick Prompts / Inspiration Chips -->
+            <div style="margin-top: 0.6rem;">
+              <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">Quick Inspiration:</span>
+              <div id="quickInspirations" class="inspiration-chips"></div>
+            </div>
+          </div>
+
+          <!-- Acceptance Criterion #1: Start Break Button (Disabled until >= 3 chars) -->
+          <button id="btnStartQuick" class="btn-start-break" disabled>
+            <span>Start Bounded Break</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Pathway 2: Explore Catalog Directory Section -->
+      <section id="sectionExplore" style="display: none;">
+        <!-- Filters & Search Controls (Acceptance Criterion #2) -->
+        <div class="explore-controls-wrapper">
+          <div class="explore-top-row">
+            <!-- Real-time Debounced Search Input (200ms) -->
+            <div class="search-box">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input
+                id="catalogSearchInput"
+                type="text"
+                class="search-input"
+                placeholder="Search micro-breaks by title, tag, or topic (e.g. silk, orbit, zen)..."
+                autocomplete="off"
+              >
+            </div>
+
+            <!-- Category Tab Filters -->
+            <div class="category-tabs">
+              <button class="cat-btn active" data-cat="all">All Experiences</button>
+              <button class="cat-btn" data-cat="calming">Calming & Zen</button>
+              <button class="cat-btn" data-cat="logic">Micro-Logic</button>
+              <button class="cat-btn" data-cat="stem">STEM Visualizers</button>
+              <button class="cat-btn" data-cat="curiosity">Curiosity & Wonder</button>
+            </div>
+          </div>
+
+          <!-- Duration Buckets Filter (<=3m, <=5m, <=10m) -->
+          <div class="duration-filter-row">
+            <span style="font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--sage-300);">Duration Limit:</span>
+            <button class="dur-filter-btn active" data-dur="">All Durations</button>
+            <button class="dur-filter-btn" data-dur="3">≤ 3 mins</button>
+            <button class="dur-filter-btn" data-dur="5">≤ 5 mins</button>
+            <button class="dur-filter-btn" data-dur="10">≤ 10 mins</button>
+          </div>
+        </div>
+
+        <!-- Catalog Card Grid -->
+        <div id="catalogGrid" class="catalog-grid">
+          <!-- Rendered dynamically by catalog.js -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modal: Pre-Commitment Setup for Direct Card Launch (Acceptance Criterion #3) -->
+    <div id="anchorModal" class="modal-overlay">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <span id="modalDuration" class="card-duration-pill" style="margin-bottom: 0.4rem; display: inline-block;">⏱️ Bounded limit</span>
+            <h3 id="modalTitle" class="modal-title">Experience Name</h3>
+          </div>
+          <button id="btnModalClose" class="modal-close-btn" aria-label="Close modal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <p id="modalDesc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;"></p>
+
+        <div class="setup-step" style="margin-bottom: 1.5rem;">
+          <div class="setup-step-label">
+            <span class="step-num">!</span>
+            <span>Mandatory Pre-Commitment Work Anchor</span>
+          </div>
+          <div class="anchor-task-box">
+            <textarea
+              id="modalAnchorInput"
+              class="anchor-task-input"
+              placeholder="What exact 2-minute work task will you do immediately when this break ends?"
+              rows="2"
+              maxlength="280"
+            ></textarea>
+            <div class="anchor-task-footer">
+              <span>Must be at least 3 characters</span>
+              <span id="modalCharCounter" class="char-counter">0 / 280</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 0.6rem;">
+            <div id="modalInspirations" class="inspiration-chips"></div>
+          </div>
+        </div>
+
+        <!-- Start Button for Modal -->
+        <button id="btnModalStart" class="btn-start-break" disabled>
+          <span>Launch Bounded Break</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         BOUNDED BREAK MODE VIEW (PERSISTENT PINNED HEADER & CANVAS)
+         Acceptance Criterion #4: Time Containment
+         Acceptance Criterion #5: Zero-Delay Lockout
+         ============================================================ -->
+    <div id="breakModeView" class="break-mode-view" style="display: none;">
+      <!-- Pinned Top Bar (Criterion #4) -->
+      <div id="pinnedTimerBar" class="pinned-timer-bar">
+        <!-- Monospaced JetBrains Mono Countdown Timer -->
+        <div class="timer-container">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--sage-400);">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="countdownClock" class="countdown-clock timer-display">05:00</span>
+        </div>
+
+        <!-- Pinned Micro-Anchor Banner (Feature #1) -->
+        <div class="pinned-anchor-banner">
+          <span class="anchor-label">🎯 Next Task:</span>
+          <span id="pinnedAnchorText" class="anchor-text">Your re-entry task</span>
+        </div>
+
+        <!-- Break Bar Controls -->
+        <div class="break-controls">
+          <button id="btnToggleSound" class="btn-icon-toggle active" title="Toggle audio chimes">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+          <button id="btnOpenPopup" class="btn-icon-toggle" title="Open synced external popup window">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+          <button id="btnEndBreakEarly" class="btn-end-break">
+            End Break Early
+          </button>
+        </div>
+      </div>
+
+      <!-- Embedded Break Content Area (Canvas or Iframe) -->
+      <div id="breakContentArea" class="break-content-area"></div>
+    </div>
+
+    <!-- ============================================================
+         HARD RE-ENTRY MODAL (Criterion #5: Zero-Delay Lockout)
+         At 00:00, break content is unmounted/hidden behind non-bypassable overlay
+         ============================================================ -->
+    <div id="hardReEntryOverlay" class="hard-reentry-overlay" style="display: none;">
+      <div class="reentry-card">
+        <div class="reentry-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Time Is Up • Hard Re-Entry</span>
+        </div>
+
+        <h2 class="reentry-title">Your Micro-Break Has Ended</h2>
+        <p class="reentry-subtitle">
+          Eliminate the task-switching friction right now. Your immediate 2-minute work anchor is locked in:
+        </p>
+
+        <!-- Saved Micro-Anchor Prominent Display -->
+        <div class="reentry-anchor-display">
+          <div class="anchor-display-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>Your Committed 2-Minute Task:</span>
+          </div>
+          <div id="reEntryAnchorText" class="anchor-display-text">Write your unit tests</div>
+        </div>
+
+        <!-- Single Action CTA (Criterion #6: Clean Re-Entry) -->
+        <button id="btnReturnToWork" class="btn-return-work">
+          <span>Return to Work Now</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+  </div>
+
+  <!-- Main JavaScript Bundle -->
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

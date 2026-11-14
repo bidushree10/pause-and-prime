@@ -1,0 +1,108 @@
+{
+  "sessions": [
+    {
+      "sessionId": "12963293-8cdb-469b-acfa-e9a812cd8412",
+      "siteId": "unknown",
+      "siteTitle": "Custom Break Activity",
+      "microAnchor": "Reply to the client email",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-14T13:22:15.459Z"
+    },
+    {
+      "sessionId": "dff242d2-147d-4fc3-8cbf-b8a3944a6a84",
+      "siteId": "quick-sudoku-4x4",
+      "siteTitle": "Quick Sudoku Mini 4x4",
+      "microAnchor": "coding",
+      "durationMinutes": 2,
+      "elapsedSeconds": 120,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-13T17:06:43.285Z"
+    },
+    {
+      "sessionId": "cfe42b11-65d0-45c6-bfba-6a0326a8240f",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "write lab records",
+      "durationMinutes": 1,
+      "elapsedSeconds": 60,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T14:28:11.549Z"
+    },
+    {
+      "sessionId": "test-session-mock-456",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "Refactor auth controller",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T14:25:18.565Z"
+    },
+    {
+      "sessionId": "test-session-mock-456",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "Refactor auth controller",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T14:06:42.359Z"
+    },
+    {
+      "sessionId": "test-session-mock-456",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "Refactor auth controller",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T14:05:56.399Z"
+    },
+    {
+      "sessionId": "test-session-mock-456",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "Refactor auth controller",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T14:05:35.051Z"
+    },
+    {
+      "sessionId": "test-session-mock-456",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "Refactor auth controller",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T14:05:16.273Z"
+    },
+    {
+      "sessionId": "test-session-mock-456",
+      "siteId": "weave-silk",
+      "siteTitle": "Weave Silk Generative Canvas",
+      "microAnchor": "Refactor auth controller",
+      "durationMinutes": 5,
+      "elapsedSeconds": 300,
+      "completed": true,
+      "reEntryCompleted": true,
+      "endedAt": "2026-11-11T13:58:39.907Z"
+    }
+  ],
+  "stats": {
+    "totalSessionsCompleted": 9,
+    "totalMinutesSpent": 38,
+    "totalAnchorsReturned": 9
+  }
+}
