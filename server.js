@@ -100,3 +100,9 @@ export async function startServer(port = CONFIG.PORT) {
 if (process.argv[1] && process.argv[1].endsWith('server.js')) {
   startServer(CONFIG.PORT);
 }
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+}
+
+export default app;
