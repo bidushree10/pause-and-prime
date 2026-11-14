@@ -9,6 +9,7 @@ const DATA_DIR = process.env.VERCEL ? '/tmp' : path.join(ROOT_DIR, 'data');
 export const CONFIG = {
   PORT: process.env.PORT || 3000,
   PUBLIC_DIR: path.join(ROOT_DIR, 'public'),
+  SEED_SITES_FILE: path.join(ROOT_DIR, 'data', 'sites.json'),
   SITES_FILE: path.join(DATA_DIR, 'sites.json'),
   SESSIONS_FILE: path.join(DATA_DIR, 'sessions.json')
 };

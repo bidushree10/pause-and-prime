@@ -5,7 +5,11 @@ import { CONFIG } from './config.js';
 // Ensure data files exist with default structures if missing
 export async function initializeDb() {
   if (!existsSync(CONFIG.SITES_FILE)) {
-    await fs.writeFile(CONFIG.SITES_FILE, JSON.stringify([], null, 2), 'utf-8');
+    if (existsSync(CONFIG.SEED_SITES_FILE)) {
+      await fs.copyFile(CONFIG.SEED_SITES_FILE, CONFIG.SITES_FILE);
+    } else {
+      await fs.writeFile(CONFIG.SITES_FILE, JSON.stringify([], null, 2), 'utf-8');
+    }
   }
   if (!existsSync(CONFIG.SESSIONS_FILE)) {
     const initialSessions = {
