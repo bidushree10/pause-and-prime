@@ -96,13 +96,20 @@ export async function startServer(port = CONFIG.PORT) {
   });
 }
 
-// Auto-start if run directly
-if (process.argv[1] && process.argv[1].endsWith('server.js')) {
+// Auto-start locally
+if (!process.env.VERCEL && process.argv[1] && process.argv[1].endsWith('server.js')) {
   startServer(CONFIG.PORT);
 }
 
-if (!process.env.VERCEL) {
-  app.listen(PORT, () => console.log(`Server running on ${PORT}`));
-}
+// Vercel serverless entry point
+let dbInitialized = false;
+const vercelServer = http.createServer(async (req, res) => {
+  if (!dbInitialized) {
+    await initializeDb();
+    dbInitialized = true;
+  }
+  const handler = createServer();
+  handler.emit('request', req, res);
+});
 
-export default app;
+export default vercelServer;
